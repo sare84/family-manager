@@ -1,12 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { InfoService } from './info.service';
 import { Info } from './interfaces/info.interface';
+import { InfoController } from './info.controller';
 
 describe('InfoService', () => {
   let service: InfoService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      controllers: [InfoController],
       providers: [InfoService],
     }).compile();
 
