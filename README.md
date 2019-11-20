@@ -15,6 +15,41 @@ The app is build with the latest version of Angular! Additional packages will be
 ### Api
 
 The api will be build with Nest.js
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+Commands for the api
+
+#### Installation
+
+```bash
+$ npm install
+```
+
+#### Running the app
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+#### Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
 
 ## Features
 
