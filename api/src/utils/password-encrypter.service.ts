@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
-
 import { EncryptionException } from '../exceptions/bcrypt.exception';
+
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class PasswordEncrypterService { 
   async hash(password: String): Promise<string> {
-    const bcrypt = require('bcryptjs');
-    console.log(password, bcrypt);
     try {
       return await bcrypt.hash(password, 8);
     } catch (error) {
@@ -15,7 +14,6 @@ export class PasswordEncrypterService {
   }
   
   async verify(password: String, encrypted: String): Promise<boolean> {
-    const bcrypt = require('bcryptjs');
     try {
       return await bcrypt.compare(password, encrypted);
     } catch (error) {
