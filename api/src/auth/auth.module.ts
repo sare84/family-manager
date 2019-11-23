@@ -4,7 +4,6 @@ import { PassportModule } from '@nestjs/passport';
 
 import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
-import { LocalStrategy } from './local.strategy';
 import { AuthController } from './auth.controller';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
@@ -19,7 +18,7 @@ import { PasswordEncrypterService } from '../utils/password-encrypter.service';
       signOptions: { expiresIn: '1800s' },
     })
   ],
-  providers: [PasswordEncrypterService, AuthService, LocalStrategy, JwtStrategy],
+  providers: [PasswordEncrypterService, AuthService, JwtStrategy],
   controllers: [AuthController]
 })
 export class AuthModule {}

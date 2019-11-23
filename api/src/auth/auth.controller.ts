@@ -1,5 +1,6 @@
 import { Controller, Request, Post, UseGuards, Get, Res, HttpException, HttpStatus, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 
@@ -7,7 +8,6 @@ import { UsersService } from '../users/users.service';
 export class AuthController {
   constructor(private readonly authService: AuthService, private readonly userService: UsersService) {}
   
-  @UseGuards(AuthGuard('local'))
   @Post('auth/login')
   async login(@Body() user) {
     const { username, password } = user;

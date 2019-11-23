@@ -1,10 +1,11 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+
 import { InfoController } from './info/info.controller';
 import { InfoService } from './info/info.service';
 import { LoggerMiddleware } from './logger.middleware';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { MongooseModule } from '@nestjs/mongoose';
 import { UsersController } from './users/users.controller';
 import { PasswordEncrypterService } from './utils/password-encrypter.service';
 

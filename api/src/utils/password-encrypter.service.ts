@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { EncryptionException } from '../exceptions/bcrypt.exception';
 
 import * as bcrypt from 'bcryptjs'
