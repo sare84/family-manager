@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getApiInfo().subscribe((data) => {
-      console.log(data);
       this.apiInfo = data;
     })
   }
