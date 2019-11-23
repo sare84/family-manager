@@ -5,10 +5,11 @@ import { LoggerMiddleware } from './logger.middleware';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UsersController } from './users/users.controller';
 
 @Module({
-  imports: [AuthModule, UsersModule, MongooseModule.forRoot('mongodb://mongo', { useNewUrlParser: true, useUnifiedTopology: true })],
-  controllers: [InfoController],
+  imports: [AuthModule, UsersModule, MongooseModule.forRoot('mongodb://mongo/familymanager', { useNewUrlParser: true, useUnifiedTopology: true })],
+  controllers: [InfoController, UsersController],
   providers: [InfoService],
 })
 export class AppModule implements NestModule {
