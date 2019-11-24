@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { Info } from './interfaces/info.interface';
 
 @Injectable()

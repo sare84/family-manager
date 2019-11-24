@@ -1,6 +1,5 @@
 import { Controller, Request, Post, UseGuards, Get, Res, HttpException, HttpStatus, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import * as _ from 'lodash';
 
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';

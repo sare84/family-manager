@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { InfoService } from './info.service';
-import { Info } from './interfaces/info.interface';
 import { InfoController } from './info.controller';
 
 describe('InfoService', () => {

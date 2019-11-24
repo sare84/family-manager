@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+
 import { InfoService } from './info.service';
 import { Info } from './interfaces/info.interface';
 
