@@ -1,13 +1,14 @@
 import { Controller, Request, Post, UseGuards, Get, Res, HttpException, HttpStatus, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import * as _ from 'lodash';
 
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 
 @Controller()
 export class AuthController {
-  constructor(private readonly authService: AuthService, private readonly userService: UsersService) {}
-  
+  constructor(private readonly authService: AuthService, private readonly userService: UsersService) { }
+
   @Post('auth/login')
   async login(@Body() user) {
     const { username, password } = user;
@@ -21,7 +22,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('profile')
-  getProfile(@Request() req) {
-    return this.userService.findOne(req.user);
+  async getProfile(@Request() req) {
+    return await this.userService.findOne(req.user);
   }
 }
