@@ -1,7 +1,8 @@
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
-<div class="main-container" [dir]="dir" [ngClass]="{'minisidebar': minisidebar, 'boxed': boxed, 'danger': danger, 'blue': blue, 'green': green, 'dark': dark }">
+<div class="main-container" [dir]="dir"
+    [ngClass]="{'minisidebar': minisidebar, 'boxed': boxed, 'danger': danger, 'blue': blue, 'green': green, 'dark': dark }">
     <!-- ============================================================== -->
     <!-- Topbar - style you can find in header.scss -->
     <!-- ============================================================== -->
@@ -17,11 +18,13 @@
                         <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo">
                         <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo">
                     </b> 
-                -->                    
+                -->
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span fxShow="false" fxShow.gt-xs>
-                    Family Manager
+                    <a class="" [routerLink]="['/']">
+                        Family Manager
+                    </a>
                 </span>
             </a>
         </div>
@@ -69,8 +72,8 @@
         <!-- Sidebar - style you can find in sidebar.scss -->
         <!-- ============================================================== -->
         <mat-sidenav #snav id="snav" class="pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'" fixedTopGap="0"
-            [opened]="mobileQuery.matches" [disableClose]="mobileQuery.matches" (open)="sidebarOpened = true" (close)="sidebarOpened = false"
-            [perfectScrollbar]="config">
+            [opened]="mobileQuery.matches" [disableClose]="mobileQuery.matches" (open)="sidebarOpened = true"
+            (close)="sidebarOpened = false" [perfectScrollbar]="config">
 
             <app-sidebar class="app-sidebar"></app-sidebar>
 
@@ -87,7 +90,8 @@
 
                     <h3 mat-subheader class="text-uppercase font-weight-bold">Settings</h3>
                     <mat-list-item>
-                        <mat-slide-toggle color="warn" (change)="dir = (dir == 'rtl' ? 'ltr' : 'rtl')">RTL</mat-slide-toggle>
+                        <mat-slide-toggle color="warn" (change)="dir = (dir == 'rtl' ? 'ltr' : 'rtl')">RTL
+                        </mat-slide-toggle>
                     </mat-list-item>
                     <mat-list-item>
                         <mat-slide-toggle color="warn" [(ngModel)]="boxed">Boxed Layout</mat-slide-toggle>
@@ -98,17 +102,21 @@
                     <mat-divider></mat-divider>
                     <h3 mat-subheader class="text-uppercase font-weight-bold">Colors</h3>
                     <mat-list-item>
-                        <mat-checkbox color="warn" [(ngModel)]="danger" (change)="green = blue = false" class="text-danger">Red</mat-checkbox>
+                        <mat-checkbox color="warn" [(ngModel)]="danger" (change)="green = blue = false"
+                            class="text-danger">Red</mat-checkbox>
                     </mat-list-item>
                     <mat-list-item>
-                        <mat-checkbox color="warn" [(ngModel)]="green" (change)="danger = blue = false" class="text-megna">Teal
+                        <mat-checkbox color="warn" [(ngModel)]="green" (change)="danger = blue = false"
+                            class="text-megna">Teal
                             Green</mat-checkbox>
                     </mat-list-item>
                     <mat-list-item>
-                        <mat-checkbox color="warn" [(ngModel)]="blue" (change)="green = danger = false" class="text-info">Blue</mat-checkbox>
+                        <mat-checkbox color="warn" [(ngModel)]="blue" (change)="green = danger = false"
+                            class="text-info">Blue</mat-checkbox>
                     </mat-list-item>
                     <mat-list-item>
-                        <mat-checkbox color="warn" [(ngModel)]="dark" (change)="green = blue = danger = false">Dark</mat-checkbox>
+                        <mat-checkbox color="warn" [(ngModel)]="dark" (change)="green = blue = danger = false">Dark
+                        </mat-checkbox>
                     </mat-list-item>
                 </mat-nav-list>
             </div>
@@ -118,15 +126,15 @@
         <!-- Page container - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <mat-sidenav-content class="page-wrapper">
-            	<app-breadcrumb></app-breadcrumb>
-                <div class="page-content">
+            <app-breadcrumb></app-breadcrumb>
+            <div class="page-content">
 
-                    <router-outlet>
-                        <app-spinner></app-spinner>
-                    </router-outlet>
+                <router-outlet>
+                    <app-spinner></app-spinner>
+                </router-outlet>
 
-                </div>
-            
+            </div>
+
         </mat-sidenav-content>
         <!-- ============================================================== -->
         <!-- Page container - style you can find in pages.scss -->
