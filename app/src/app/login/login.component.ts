@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
-import { MyserviceService } from '../services/myservice.service';
 import * as _ from 'lodash';
 import {
   FormBuilder,
@@ -14,7 +13,6 @@ import { AuthService } from '../services/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [MyserviceService]
 })
 export class LoginComponent implements OnInit {
   msg = '';
