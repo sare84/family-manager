@@ -24,7 +24,6 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { TodoModule } from './modules/todo/todo.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -51,7 +50,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     HttpClientModule,
     SharedModule,
-    TodoModule,
     RouterModule.forRoot(AppRoutes)
   ],
   providers: [

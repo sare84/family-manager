@@ -9,26 +9,28 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 export const AppRoutes: Routes = [
   {
     path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'prefix'
+  },
+  {
+    path: '',
     component: FullComponent,
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        redirectTo: '/dashboard',
-        pathMatch: 'full'
+        path: 'todo',
+        loadChildren: () => TodoModule
       },
       {
         path: 'dashboard',
         loadChildren: () => DashboardModule
       },
-      {
-        path: 'todo',
-        loadChildren: () => TodoModule
-      }
     ]
   },
+
   {
     path: 'login',
     component: LoginComponent,
-  }
+  },
+  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
