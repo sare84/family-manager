@@ -20,10 +20,13 @@ export class LoginComponent implements OnInit {
 
   async check(uname: string, p: string) {
     try {
-      const output = await this.authService.login(uname, p);
-      localStorage.setItem('username', uname);
-      localStorage.setItem('token', _.get(output, 'access_token'));
-      this.routes.navigate(['/starter']);
+      const loggedIn = await this.authService.login(uname, p);
+
+      if (loggedIn) {
+        const profile = await this.authService.getProfile();
+        console.log(profile);
+        this.routes.navigate(['/starter']); 
+      }
     } catch (error) {
       this.msg = 'Invalid Username or Password';
     }
