@@ -12,11 +12,10 @@ Each part of this software is put in a docker container!
 
 The app is build with the latest version of Angular! Additional packages will be listed there.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.14.
-
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Theme is from [WRAPPIXEL](https://www.wrappixel.com/templates/materialpro-angular-dashboard/)
+
 
 ### Api
 
