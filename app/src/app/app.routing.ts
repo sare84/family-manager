@@ -4,17 +4,22 @@ import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { TodoModule } from './modules/todo/todo.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 export const AppRoutes: Routes = [
   {
     path: '',
     component: FullComponent,
-    canActivate : [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => DashboardModule
       },
       {
         path: 'todo',

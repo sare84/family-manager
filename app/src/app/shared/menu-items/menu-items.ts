@@ -26,8 +26,8 @@ export interface Menu {
 
 const MENUITEMS = [
   {
-    state: 'starter',
-    name: 'Starter Page',
+    state: 'dashboard',
+    name: 'Dashboard',
     type: 'link',
     icon: 'content_copy'
   },

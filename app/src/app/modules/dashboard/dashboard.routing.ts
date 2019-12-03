@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
+import { StarterComponent } from './starter/starter.component';
 
-import { OverviewComponent } from './overview/overview.component';
-
-export const TodoRoutes: Routes = [
+export const DashboardRoutes: Routes = [
   {
     path: '',
-    component: OverviewComponent,
+    component: StarterComponent,
     data: {
       title: 'Overview',
       urls: [
