@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { MyserviceService } from '../services/myservice.service';
-
+import * as _ from 'lodash';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormControl
 } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,15 @@ import {
 })
 export class LoginComponent implements OnInit {
   msg = '';
-  constructor(private service: MyserviceService, private routes: Router) { }
+  constructor(private authService: AuthService, private routes: Router) { }
 
-  check(uname: string, p: string) {
-    const output = this.service.checkusernameandpassword(uname, p);
-    if (output == true) {
+  async check(uname: string, p: string) {
+    try {
+      const output = await this.authService.login(uname, p);
+      localStorage.setItem('username', uname);
+      localStorage.setItem('token', _.get(output, 'access_token'));
       this.routes.navigate(['/starter']);
-    } else {  
+    } catch (error) {
       this.msg = 'Invalid Username or Password';
     }
   }
