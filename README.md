@@ -16,7 +16,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Theme is from [WRAPPIXEL](https://www.wrappixel.com/templates/materialpro-angular-dashboard/)
 
-
 ### Api
 
 The api will be build with Nest.js
