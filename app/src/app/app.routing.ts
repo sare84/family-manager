@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { TodoModule } from './modules/todo/todo.module';
 
 export const AppRoutes: Routes = [
   {
@@ -16,12 +17,8 @@ export const AppRoutes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'starter',
-        loadChildren: './starter/starter.module#StarterModule'
-      },
-      {
-        path: 'icons',
-        loadChildren: './icons/mat-icon.module#IconsModule'
+        path: 'todo',
+        loadChildren: () => TodoModule
       }
     ]
   },

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       if (loggedIn) {
         const profile = await this.authService.getProfile();
         console.log(profile);
-        this.routes.navigate(['/starter']); 
+        this.routes.navigate(['/todo']); 
       }
     } catch (error) {
       this.msg = 'Invalid Username or Password';
