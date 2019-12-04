@@ -39,9 +39,6 @@ export class LoginComponent implements OnInit {
       password
     };
     this.store.dispatch(new LogIn(payload));
-    /* 
-        const profile = await this.authService.getProfile();
-    */
   }
 
 
