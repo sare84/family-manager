@@ -1,15 +1,25 @@
 import { Component } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+import { LogOut } from '../../../store/actions/auth.action';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/state/app.state';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: []
 })
 export class AppHeaderComponent {
-  public config: PerfectScrollbarConfigInterface = {};
-	
+  constructor(private store: Store<AppState>) {}
+
+  public config: PerfectScrollbarConfigInterface = {};	
   public showSearch = false;
-  
+
+  /** Methods */
+  public signOut():void {
+    this.store.dispatch(new LogOut());
+  }
 
   // This is for Notifications
   notifications: Object[] = [
@@ -78,4 +88,6 @@ export class AppHeaderComponent {
     }
     */
   ];
+
+
 }

@@ -54,6 +54,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap((user) => {
       localStorage.removeItem('token');
+      this.router.navigateByUrl('/login');
     })
   );
 }
