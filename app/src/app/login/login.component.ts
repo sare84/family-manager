@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
 import * as _ from 'lodash';
 import {
   FormBuilder,
@@ -7,7 +6,11 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+
+import { AppState, selectAuthState } from '../store/state/app.state';
+import { LogIn } from '../store/actions/auth.action';
 
 @Component({
   selector: 'app-login',
@@ -15,22 +18,34 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  msg = '';
-  constructor(private authService: AuthService, private routes: Router) { }
+  getState: Observable<any>;
+  errorMessage = null;
 
-  async check(uname: string, p: string) {
-    try {
-      const loggedIn = await this.authService.login(uname, p);
-
-      if (loggedIn) {
-        const profile = await this.authService.getProfile();
-        console.log(profile);
-        this.routes.navigate(['/todo']); 
-      }
-    } catch (error) {
-      this.msg = 'Invalid Username or Password';
-    }
+  constructor(
+    private store: Store<AppState>
+  ) {
+    this.getState = this.store.select(selectAuthState);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getState.subscribe((state) => {
+      console.log('state', state);
+      // this.isAuthenticated = state.isAuthenticated;
+      // this.user = state.user;
+      this.errorMessage = state.errorMessage;
+    });
+  }
+
+  check(username: string, password: string): void {
+    const payload = {
+      username,
+      password
+    };
+    this.store.dispatch(new LogIn(payload));
+    /* 
+        const profile = await this.authService.getProfile();
+    */
+  }
+
+
 }

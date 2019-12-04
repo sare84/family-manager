@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.class';
 
 
 @Injectable({
@@ -19,20 +20,9 @@ export class AuthService {
     return this.httpClient.get(`${this.apiUrl}${this.infoRoute}`);
   }
 
-  login(username: string, password: string): boolean{
+  login(username: string, password: string): Observable<any>{
     const url = `${this.apiUrl}${this.authRoute}`;
-
-    this.httpClient.post(url, { username, password }).subscribe(result => {
-      const token = _.get(result, 'access_token');
-      localStorage.setItem('token', token); 
-    });
-    if (!_.isEmpty(this.getToken())) {
-      localStorage.setItem('username', username);
-      return true;
-    } else {
-      return false;
-    }
-  
+    return this.httpClient.post<User>(url, {username, password});  
   }
 
   getProfile() {
