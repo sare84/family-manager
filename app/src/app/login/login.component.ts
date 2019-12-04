@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { AppState, selectAuthState } from '../store/state/app.state';
-import { LogIn } from '../store/actions/auth.action';
+import * as AuthActionTypes from '../store/actions/auth.action';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       username,
       password
     };
-    this.store.dispatch(new LogIn(payload));
+    this.store.dispatch(AuthActionTypes.LogIn(payload));
   }
 
 

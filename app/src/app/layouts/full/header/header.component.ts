@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-import { LogOut } from '../../../store/actions/auth.action';
+import * as AuthActionTypes  from '../../../store/actions/auth.action';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/state/app.state';
 
@@ -18,7 +18,7 @@ export class AppHeaderComponent {
 
   /** Methods */
   public signOut():void {
-    this.store.dispatch(new LogOut());
+    this.store.dispatch(AuthActionTypes.LogOut());
   }
 
   // This is for Notifications

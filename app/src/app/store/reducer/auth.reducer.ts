@@ -1,5 +1,5 @@
 import { User } from '../../models/user.class';
-import { AuthActionTypes, All } from '../actions/auth.action';
+import { AuthActionTypes, LogInSuccess, LogInFailure, GetProfileSuccess, GetProfileFailure, LogOut } from '../actions/auth.action';
 
 export interface State {
   // is a user authenticated?
@@ -16,9 +16,9 @@ export const initialState: State = {
   errorMessage: null
 };
 
-export function authReducer(state = initialState, action: All): State {
+export function authReducer(state = initialState, action: AuthActionTypes): State {
   switch (action.type) {
-    case AuthActionTypes.LOGIN_SUCCESS: {
+    case LogInSuccess.type: {
       return {
         ...state,
         isAuthenticated: true,
@@ -29,13 +29,13 @@ export function authReducer(state = initialState, action: All): State {
         errorMessage: null
       };
     }
-    case AuthActionTypes.LOGIN_FAILURE: {
+    case LogInFailure.type: {
       return {
         ...state,
         errorMessage: 'Incorrect email and/or password.'
       };
     }
-    case AuthActionTypes.GETPROFILESUCCESS: {
+    case GetProfileSuccess.type: {
       return {
         ...state,
         user: {
@@ -44,13 +44,13 @@ export function authReducer(state = initialState, action: All): State {
         },
       }
     }
-    case AuthActionTypes.GETPROFILEFAILURE: {
+    case GetProfileFailure.type: {
       return {
         ...state,
         errorMessage: 'Profile could not be loaded.'
       };
     }
-    case AuthActionTypes.LOGOUT: {
+    case LogOut.type: {
       return initialState;
     }
     default: {

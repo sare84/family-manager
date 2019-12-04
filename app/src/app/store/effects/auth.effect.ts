@@ -12,7 +12,9 @@ import 'rxjs/add/operator/catch';
 import * as _ from 'lodash';
 
 import { AuthService } from '../../services/auth.service';
-import { AuthActionTypes, LogIn, LogInSuccess, LogInFailure, GetProfile, GetProfileSuccess } from '../actions/auth.action';
+import { LogInSuccess, LogInFailure, GetProfile, GetProfileSuccess, GetProfileFailure, LogOut, LogIn } from '../actions/auth.action';
+import * as AuthActionTypes from '../actions/auth.action';
+
 import { AppState } from '../state/app.state';
 
 @Injectable()
@@ -26,43 +28,41 @@ export class AuthEffects {
   ) { }
 
   @Effect()
-  public LogIn: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN))
-    .map((action: LogIn) => action.payload)
-    .switchMap(payload => {
-      return this.authService.login(payload.username, payload.password)
+  public LogIn$: Observable<any> = this.actions.pipe(
+    ofType(LogIn))
+    .switchMap(({ username, password }) => {
+      return this.authService.login(username, password)
         .map((result) => {
-          return new LogInSuccess({ token: result.access_token, username: payload.username });
+          return AuthActionTypes.LogInSuccess({ token: result.access_token, username });
         })
         .catch((error) => {
-          return Observable.of(new LogInFailure({ error }));
+          return Observable.of(AuthActionTypes.LogInFailure({ error }));
         });
     });
 
   @Effect({ dispatch: false })
-  public LogInSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN_SUCCESS),
-    map((action: LogInSuccess) => action.payload),
-    tap(async (payload) => {
+  public LogInSuccess$: Observable<any> = this.actions.pipe(
+    ofType(LogInSuccess),
+    tap(async ({ payload }) => {
       this.authService.setToken(_.get(payload, 'token'));
-      await this.store.dispatch(new GetProfile());
+      await this.store.dispatch(AuthActionTypes.GetProfile());
       await this.router.navigateByUrl('/');
     }),
   );
 
   @Effect({ dispatch: false })
-  public LogInFailure: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN_FAILURE)
+  public LogInFailure$: Observable<any> = this.actions.pipe(
+    ofType(LogInFailure)
   );
 
   @Effect({ dispatch: false })
-  public GetProfileFailure: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.GETPROFILEFAILURE)
+  public GetProfileFailure$: Observable<any> = this.actions.pipe(
+    ofType(GetProfileFailure)
   );
 
   @Effect({ dispatch: false })
-  public LogOut: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGOUT),
+  public LogOut$: Observable<any> = this.actions.pipe(
+    ofType(LogOut),
     tap((user) => {
       this.authService.deleteToken();
       this.router.navigateByUrl('/login');
@@ -70,21 +70,21 @@ export class AuthEffects {
   );
 
   @Effect()
-  GetProfile: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.GETPROFILE))
+  public GetProfile$: Observable<any> = this.actions.pipe(
+    ofType(GetProfile))
     .switchMap(() => {
       return this.authService.getProfile()
         .map((result) => {
-          return new GetProfileSuccess({ ...result });
+          return AuthActionTypes.GetProfileSuccess({ ...result });
         })
         .catch((error) => {
-          return Observable.of(new LogInFailure({ error }));
+          return Observable.of(AuthActionTypes.LogInFailure({ error }));
         });
     });
 
   @Effect({ dispatch: false })
-  public GetProfileSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.GETPROFILESUCCESS)
+  public GetProfileSuccess$: Observable<any> = this.actions.pipe(
+    ofType(GetProfileSuccess)
   );
 
 }
