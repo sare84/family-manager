@@ -16,9 +16,7 @@ export class AuthService {
   public authRoute = '/auth/login';
   public profileRoute = '/profile';
 
-  getApiInfo() {
-    return this.httpClient.get(`${this.apiUrl}${this.infoRoute}`);
-  }
+  public static tokenKey = 'token';
 
   login(username: string, password: string): Observable<any>{
     const url = `${this.apiUrl}${this.authRoute}`;
@@ -31,8 +29,18 @@ export class AuthService {
   }
 
   getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem(AuthService.tokenKey);
   }
+
+  setToken(token: string): void {
+    localStorage.setItem(AuthService.tokenKey, token);
+  }
+
+  deleteToken(): void {
+    localStorage.removeItem(AuthService.tokenKey);
+  }
+
+
 
   constructor(public httpClient: HttpClient) { }
 }

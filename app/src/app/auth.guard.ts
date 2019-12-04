@@ -5,7 +5,8 @@ import {
   RouterStateSnapshot,
   Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+
+import { AuthService } from './services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,15 @@ import { Observable } from 'rxjs';
 
 export class AuthGuard implements CanActivate {
 
-  constructor(private routes: Router) { }
+  constructor(
+    private routes: Router,
+    private authService: AuthService
+    ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem('token') != null) {
+    if (this.authService.getToken() != null) {
       return true;
     } else {
       this.routes.navigate(['/login']);
