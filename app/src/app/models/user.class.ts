@@ -1,4 +1,5 @@
 export class User {
+  _id: String;
   firstname: String;
   lastname: String;
   username: String;
@@ -6,3 +7,4 @@ export class User {
   password: String;
   token?: string;
 };
+

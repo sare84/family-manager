@@ -25,9 +25,9 @@ export class AuthService {
     return this.httpClient.post<User>(url, {username, password});  
   }
 
-  getProfile() {
+  getProfile(): Observable<User> {
     const url = `${this.apiUrl}${this.profileRoute}`;
-    return this.httpClient.get(url).toPromise();  
+    return this.httpClient.get<User>(url);  
   }
 
   getToken(): string {

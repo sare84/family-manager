@@ -35,6 +35,21 @@ export function authReducer(state = initialState, action: All): State {
         errorMessage: 'Incorrect email and/or password.'
       };
     }
+    case AuthActionTypes.GETPROFILESUCCESS: {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      }
+    }
+    case AuthActionTypes.GETPROFILEFAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Profile could not be loaded.'
+      };
+    }
     case AuthActionTypes.LOGOUT: {
       return initialState;
     }

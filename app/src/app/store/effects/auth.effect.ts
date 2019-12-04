@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
+import { tap, map } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
-import { tap } from 'rxjs/operators';
+
+import * as _ from 'lodash';
 
 import { AuthService } from '../../services/auth.service';
-import { AuthActionTypes, LogIn, LogInSuccess, LogInFailure, LogOut } from '../actions/auth.action';
+import { AuthActionTypes, LogIn, LogInSuccess, LogInFailure, GetProfile, GetProfileSuccess } from '../actions/auth.action';
+import { AppState } from '../state/app.state';
 
 @Injectable()
 export class AuthEffects {
@@ -19,10 +22,11 @@ export class AuthEffects {
     private actions: Actions,
     private authService: AuthService,
     private router: Router,
+    private store: Store<AppState>,
   ) { }
 
   @Effect()
-  LogIn: Observable<any> = this.actions.pipe(
+  public LogIn: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN))
     .map((action: LogIn) => action.payload)
     .switchMap(payload => {
@@ -31,22 +35,29 @@ export class AuthEffects {
           return new LogInSuccess({ token: result.access_token, username: payload.username });
         })
         .catch((error) => {
-          return Observable.of(new LogInFailure({ error: error }));
+          return Observable.of(new LogInFailure({ error }));
         });
     });
 
   @Effect({ dispatch: false })
-  LogInSuccess: Observable<any> = this.actions.pipe(
+  public LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
-    tap((action) => {
-      localStorage.setItem('token', action.payload.token);
-      this.router.navigateByUrl('/');
-    })
+    map((action: LogInSuccess) => action.payload),
+    tap(async (payload) => {
+      await localStorage.setItem('token', _.get(payload, 'token'));
+      await this.store.dispatch(new GetProfile());
+      await this.router.navigateByUrl('/');
+    }),
   );
 
   @Effect({ dispatch: false })
-  LogInFailure: Observable<any> = this.actions.pipe(
+  public LogInFailure: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_FAILURE)
+  );
+
+  @Effect({ dispatch: false })
+  public GetProfileFailure: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GETPROFILEFAILURE)
   );
 
   @Effect({ dispatch: false })
@@ -57,4 +68,23 @@ export class AuthEffects {
       this.router.navigateByUrl('/login');
     })
   );
+
+  @Effect()
+  GetProfile: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GETPROFILE))
+    .switchMap(() => {
+      return this.authService.getProfile()
+        .map((result) => {
+          return new GetProfileSuccess({ ...result });
+        })
+        .catch((error) => {
+          return Observable.of(new LogInFailure({ error }));
+        });
+    });
+
+  @Effect({ dispatch: false })
+  public GetProfileSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GETPROFILESUCCESS)
+  );
+
 }
