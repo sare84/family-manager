@@ -8,12 +8,16 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { UsersController } from './users/users.controller';
 import { PasswordEncrypterService } from './utils/password-encrypter.service';
+import { TodoController } from './todo/todo.controller';
+import { TodoService } from './todo/todo.service';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, MongooseModule.forRoot('mongodb://mongo/familymanager', { useNewUrlParser: true, useUnifiedTopology: true })],
-  controllers: [InfoController, UsersController],
+  imports: [AuthModule, UsersModule, MongooseModule.forRoot('mongodb://mongo/familymanager', { useNewUrlParser: true, useUnifiedTopology: true }), TodoModule],
+  controllers: [InfoController, UsersController, TodoController],
   providers: [InfoService, PasswordEncrypterService],
 })
+
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');
