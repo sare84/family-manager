@@ -27,5 +27,11 @@ export class TodoService {
     return this.todoModel.find({ username });
   }
 
+  async findOne(id: String, username: String): Promise<Todo | undefined> {
+    return this.todoModel.findOne({ username, _id: id})
+  }
 
+  async delete(id: String, username: String) {
+    return this.todoModel.findByIdAndRemove(id);
+  }
 }
