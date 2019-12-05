@@ -34,4 +34,10 @@ export class TodoController {
   async deleteById(@Request() req, @Param('id') id){
     return this.todoService.delete(id, req.user.username);
   }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post(':id')
+  async updateById(@Request() req, @Param('id') id, @Body() createTodoDto: CreateTodoDto){
+    return this.todoService.update(id, createTodoDto, req.user.username);
+  }
 }

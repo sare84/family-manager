@@ -33,4 +33,8 @@ export class TodoService {
   async delete(_id: String, username: String) {
     return this.todoModel.deleteOne({ _id, username });
   }
+
+  async update(_id: String, todo: Todo, username: String) {
+    return this.todoModel.updateOne({ _id }, todo);
+  } 
 }
