@@ -24,7 +24,6 @@ export class AppHeaderComponent implements OnInit{
 
   ngOnInit() {
     this.getState.subscribe((state) => {
-      console.log(state);
       this.user = state.user;
     });
   }
