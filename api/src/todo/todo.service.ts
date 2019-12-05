@@ -26,11 +26,11 @@ export class TodoService {
     return this.todoModel.find({ username });
   }
 
-  async findOne(id: String, username: String): Promise<Todo | undefined> {
-    return this.todoModel.findOne({ username, _id: id})
+  async findOne(_id: String, username: String): Promise<Todo | undefined> {
+    return this.todoModel.findOne({ username, _id})
   }
 
-  async delete(id: String, username: String) {
-    return this.todoModel.findByIdAndRemove(id);
+  async delete(_id: String, username: String) {
+    return this.todoModel.deleteOne({ _id, username });
   }
 }
