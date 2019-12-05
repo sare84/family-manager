@@ -1,6 +1,5 @@
 import { Controller, Post, Body, Request, UseGuards, Get, Param, Delete } from '@nestjs/common';
 import { TodoService } from './todo.service';
-import { async } from 'rxjs/internal/scheduler/async';
 import { CreateTodoDto } from './create-todo.dto';
 import { AuthGuard } from '@nestjs/passport';
 

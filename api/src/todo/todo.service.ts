@@ -1,9 +1,8 @@
-import { Injectable, Logger, HttpStatus, HttpException, Scope, Inject } from '@nestjs/common';
+import { Injectable, Logger, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Todo } from './todo.interface';
 import { Model } from 'mongoose';
 import { CreateTodoDto } from './create-todo.dto';
-import { REQUEST } from '@nestjs/core';
 
 @Injectable()
 export class TodoService {
