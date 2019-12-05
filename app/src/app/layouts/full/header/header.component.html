@@ -50,7 +50,7 @@
     <div class="mailbox">
         <ul>
             <li>
-                <div class="drop-title">You have 4 new Mymessages</div>
+                <div class="drop-title">No new messages</div>
             </li>
             <li>
                 <div class="message-center">
@@ -78,14 +78,29 @@
 <!-- Profile - style you can find in header.scss -->
 <!-- ============================================================== -->
 <button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5">
-    <mat-icon _ngcontent-pmt-c12="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true">account_circle</mat-icon> </button>
+    <mat-icon _ngcontent-pmt-c12="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img"
+        aria-hidden="true">account_circle</mat-icon>
+</button>
 <mat-menu #profile="matMenu" class="mymegamenu">
-    <button mat-menu-item>
-        <mat-icon>settings</mat-icon> Settings </button>
-    <button mat-menu-item>
-        <mat-icon>account_box</mat-icon> Profile </button>
-    <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon> Disable notifications </button>
-    <button mat-menu-item (click)="signOut()">
-        <mat-icon>exit_to_app</mat-icon> Sign Out </button>
+    <div class="mailbox">
+        <ul>
+            <li *ngIf="user">
+                <div class="drop-title">{{ user.firstname }} {{ user.lastname }}</div>
+            </li>
+            <li>
+                <button mat-menu-item>
+                    <mat-icon>settings</mat-icon> Settings
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>account_box</mat-icon> Profile
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>notifications_off</mat-icon> Disable notifications
+                </button>
+                <button mat-menu-item (click)="signOut()">
+                    <mat-icon>exit_to_app</mat-icon> Sign Out
+                </button>
+            </li>
+        </ul>
+    </div>
 </mat-menu>

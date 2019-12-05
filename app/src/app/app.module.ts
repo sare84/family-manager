@@ -29,9 +29,15 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AuthEffects } from './store/effects/auth.effect';
 import { authReducer } from './store/reducer/auth.reducer'
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, MetaReducer, ActionReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({keys: ['auth'], rehydrate: true})(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -58,7 +64,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     HttpClientModule,
     SharedModule,
-    StoreModule.forRoot( {auth: authReducer }),
+    StoreModule.forRoot( {auth: authReducer }, {metaReducers}),
     EffectsModule.forRoot([AuthEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
