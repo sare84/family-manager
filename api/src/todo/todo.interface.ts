@@ -4,5 +4,6 @@ export interface Todo extends Document {
   description: String;
   created: Date;
   done: Boolean;
-  username: String;
+  creator: String;
+  assigned: String;
 };

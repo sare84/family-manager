@@ -23,18 +23,25 @@ export class TodoService {
   }
 
   async find(username: String): Promise<Todo | undefined> {
-    return this.todoModel.find({ username });
+    return this.todoModel.find({
+      $or: [{ assigned: username }, { assigned: null }]
+    });
   }
 
   async findOne(_id: String, username: String): Promise<Todo | undefined> {
-    return this.todoModel.findOne({ username, _id})
+    return this.todoModel.findOne({
+      $and: [
+        { _id },
+        { $or: [{ assigned: username }, { creator: username }] }
+      ]
+    })
   }
 
   async delete(_id: String, username: String) {
-    return this.todoModel.deleteOne({ _id, username });
+    return this.todoModel.deleteOne({ _id, creator: username });
   }
 
-  async update(_id: String, todo: Todo, username: String) {
+  async update(_id: String, todo: CreateTodoDto, username: String) {
     return this.todoModel.updateOne({ _id }, todo);
-  } 
+  }
 }

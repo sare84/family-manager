@@ -12,7 +12,7 @@ export class TodoController {
   @UseGuards(AuthGuard('jwt'))
   @Post()
   async create(@Request() req, @Body() createTodoDto: CreateTodoDto) {
-    createTodoDto.username = req.user.username;
+    createTodoDto.creator = req.user.username;
     createTodoDto.created = new Date();
     return this.todoService.create(createTodoDto);
   }
