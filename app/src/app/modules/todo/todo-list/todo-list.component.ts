@@ -12,6 +12,7 @@ import { Todo } from '../../../models/todo.class';
 export class TodoListComponent implements OnInit {
   public getState: Observable<any>;
   public list: Array<Todo> = null;
+  public displayedColumns: string[] = ['description', 'created', 'done', 'public', 'assigned'];
 
   constructor(private store: Store<AppState>) {
     this.getState = this.store.select(selectTodoState);
@@ -21,6 +22,10 @@ export class TodoListComponent implements OnInit {
     this.getState.subscribe((state) => {
       this.list = state.todoList;
     });
+  }
+
+  selectRow(row) {
+    console.log(row);
   }
 
   

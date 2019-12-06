@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr.mat-row:hover {
+  border-left: 3px solid #1e88e5;
+  border-right: 3px solid #1e88e5;
+}
