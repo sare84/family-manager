@@ -6,15 +6,17 @@ import { OverviewComponent } from './overview/overview.component';
 import { RouterModule } from '@angular/router';
 import { DemoMaterialModule } from '../../demo-material-module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { MatToolbarModule } from '@angular/material';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [OverviewComponent],
+  declarations: [OverviewComponent, TodoListComponent],
   imports: [
     RouterModule.forChild(TodoRoutes),
     DemoMaterialModule,
     FlexLayoutModule,
-    CommonModule
+    CommonModule,
+    MatToolbarModule
   ]
 })
 export class TodoModule { }
