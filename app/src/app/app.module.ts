@@ -19,7 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
-import { TokenInterceptor } from './interceptor/token.interceptor'; 
+import { TokenInterceptor } from './interceptor/token.interceptor';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -39,7 +39,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { environment } from '../environments/environment';
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({keys: ['auth', 'todo'], rehydrate: true})(reducer);
+  return localStorageSync({ keys: ['auth', 'todo'], rehydrate: true })(reducer);
 }
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
@@ -51,13 +51,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
     AppSidebarComponent,
     LoginComponent,
-	AppBreadcrumbComponent
+    AppBreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +68,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     HttpClientModule,
     SharedModule,
-    StoreModule.forRoot( {auth: auth.reducer, todo: todo.reducer }, {metaReducers}),
+    StoreModule.forRoot({ auth: auth.reducer, todo: todo.reducer }, { metaReducers }),
     EffectsModule.forRoot([AuthEffects, TodoEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
@@ -78,7 +78,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RouterModule.forRoot(AppRoutes),
   ],
   providers: [
-  AuthGuard,
+    AuthGuard,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
@@ -92,4 +92,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
