@@ -13,7 +13,7 @@ export class TodoController {
   @Post()
   async create(@Request() req, @Body() createTodoDto: CreateTodoDto) {
     createTodoDto.creator = req.user.username;
-    createTodoDto.created = new Date();
+    // createTodoDto.created = new Date();
     return this.todoService.create(createTodoDto);
   }
 
