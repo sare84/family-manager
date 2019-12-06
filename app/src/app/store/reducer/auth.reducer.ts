@@ -2,7 +2,7 @@ import { User } from '../../models/user.class';
 import { AuthActionTypes, LogInSuccess, LogInFailure, GetProfileSuccess, GetProfileFailure, LogOut } from '../actions/auth.action';
 import { createReducer, Action, on } from '@ngrx/store';
 
-export interface State {
+export interface AuthState {
   // is a user authenticated?
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
@@ -11,7 +11,7 @@ export interface State {
   errorMessage: string | null;
 }
 
-export const initialState: State = {
+export const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
   errorMessage: null
@@ -46,7 +46,7 @@ const authReducer = createReducer(
   on(LogOut, state => (initialState))
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: AuthState | undefined, action: Action) {
   return authReducer(state, action);
 }
 
