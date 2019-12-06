@@ -26,7 +26,8 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 // NGRX
-import { AuthEffects } from './store/effects/auth.effect';
+import { AuthEffects } from './store/effects/auth.effects';
+import { TodoEffects } from './store/effects/todo.effects';
 import * as auth from './store/reducer/auth.reducer'
 import * as todo from './store/reducer/todo.reducer'
 
@@ -68,7 +69,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     SharedModule,
     StoreModule.forRoot( {auth: auth.reducer, todo: todo.reducer }, {metaReducers}),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, TodoEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
