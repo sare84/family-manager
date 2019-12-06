@@ -1,5 +1,5 @@
 import { User } from '../../models/user.class';
-import { AuthActionTypes, LogInSuccess, LogInFailure, GetProfileSuccess, GetProfileFailure, LogOut } from '../actions/auth.action';
+import { LogInSuccess, LogInFailure, GetProfileSuccess, GetProfileFailure, LogOut } from '../actions/auth.action';
 import { createReducer, Action, on } from '@ngrx/store';
 
 export interface AuthState {
