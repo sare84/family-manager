@@ -74,4 +74,18 @@ $ npm run test:cov
 
 For development you could start the whole app with
 
+Before starting you should use 
+
+```bash
+npm install
+```
+
+in the app and api folder!
+
+After that you can use
+
+```bash
 docker-compose up -d
+```
+
+for start up all container
